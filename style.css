@@ -1,9 +1,7 @@
 * { box-sizing: border-box;}
 body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    background: 
-        radial-gradient(60vw 60vh at 15% -10%, rgba(0,180,255,.12), transparent 60%),
-        radial-gradient(60vw 60vh at 85% 110%, rgba(0,255,200,.10), transparent 60%),
-        linear-gradient(135deg, #e9f8ff, #eafaf3);
+    background: linear-gradient(135deg, #e9f8ff, #eafaf3);
+
     color: #0c1b24;
     position: relative;
     overflow-x: hidden;
@@ -44,6 +42,64 @@ header nav a:hover { background: linear-gradient(180deg, #f5fbff, #d9f0ff); box-
     transform: translateY(-3px);
     box-shadow: 0 10px 24px rgba(0,160,255,.2);
 }
+
+.proj-img{
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    margin-bottom: 10px;
+    box-shadow: 0 6px 16px rgba(0,80,140,.12);
+}
+
+.tags{
+    list-style: none;
+    padding: 0; margin: 8px 0 10px;
+
+}
+
+.tags li{
+    font-size: 12px;
+    color: #0e3446;
+    background: linear-gradient(180deg, #f5fbff, #e5f3ff);
+    border: 1px solid rgba(0,80,140,.18);
+    border-radius: 999px;
+    padding: 6px 10px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+.btn{
+    display: inline-block; text-decoration: none; font-weight: 600;
+    border-radius: 12px; transition: .18s ease; transform: translateZ(0);
+}
+.btn.tiny{ padding: 8px 12px; font-size: 13px; }
+
+.btn.primary{
+    color: #032635;
+    background: linear-gradient(135deg, #00b4ff, #34e6c6);
+    box-shadow: 0 0 0 2px rgba(0,180,255,.22), 0 8px 18px rgba(0,160,255,.2);
+}
+.btn.ghost{
+    color: #0e3446;
+    border: 1px solid rgba(0,80,140,.22);
+    background: linear-gradient(180deg, #ffffffcc, #eef7ffcc);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+.btn:hover{ transform: translateV(-2px); }
+
+@media (min-width: 740px){
+    #projects{
+        display: grid; gap: 16px;
+        grid-template-columns: repeat(12, 1fr);
+    }
+    #projects > h2{ grid-column: 1 / -1; }
+    #projects article{ grid-column: span 6; }
+}
+@media (min-width: 1024px){
+    #projects article{ grid-column: span 4; }
+}
 @media (prefers-reduced-motion: reduce){
     body::before,
     body::after{
@@ -58,41 +114,36 @@ header nav a:hover { background: linear-gradient(180deg, #f5fbff, #d9f0ff); box-
   from{ transform: translate(0, 0) scale(1); }
   to  { transform: translate(-3vw, -2vh) scale(1.03); }
 }
-body::before{
-    content:"";
-    position: fixed;
-    top: -12%;
-    left: -12%;
-    width: 46vmax;
-    height: 46vmax;
+.bg-blobs{
+    position: fixed; inset: 0;
+    z-index: 0;                 /* blobs layer */
     pointer-events: none;
-    z-index: 0;
+}
+.bg-blobs::before{
+    content:"";
+    position: absolute;
+    top: -12%; left: -12%;
+    width: 46vmax; height: 46vmax;
+    background:
+    radial-gradient(30% 30% at 50% 50%, rgba(0,255,200,.65) 0%, rgba(0,255,200,0) 70%),
+    radial-gradient(55% 55% at 50% 60%, rgba(255,255,255,.30) 0%, rgba(255,255,255,0) 70%),
+    radial-gradient(70% 70% at 50% 50%, rgba(0,220,170,.18) 0%, rgba(0,220,170,0) 70%);
 
-    /* glossy blobs */
-    background: radial-gradient(50% 50% at 50% 50%, rgba(0,180,255,.28) 0%, rgba(0,180,255,0) 60%);
     filter: blur(24px) saturate(120%);
-    opacity: .45;
-    border-radius: 50%;
-
+    opacity:.45; border-radius:50%;
     animation: float1 26s ease-in-out infinite alternate;
 }
+.bg-blobs::after{
+    content:"";
+    position: absolute;
+    bottom: -16%; right: -14%;
+    width: 50vmax; height: 50vmax;
+    background:
+    radial-gradient(30% 30% at 50% 50%, rgba(0,255,200,.65) 0%, rgba(0,255,200,0) 70%),
+    radial-gradient(55% 55% at 50% 60%, rgba(255,255,255,.30) 0%, rgba(255,255,255,0) 70%),
+    radial-gradient(70% 70% at 50% 50%, rgba(0,220,170,.18) 0%, rgba(0,220,170,0) 70%);
 
-body::after{
-  content:"";
-  position: fixed;
-  bottom: -16%;
-  right: -14%;
-  width: 50vmax;
-  height: 50vmax;
-  pointer-events: none;
-  z-index: 0;
-
-  /* teal-green tint for contrast */
-  background: radial-gradient(50% 50% at 50% 50%, rgba(0,255,200,.22) 0%, rgba(0,255,200,0) 60%);
-  filter: blur(26px) saturate(120%);
-  opacity: .40;
-  border-radius: 50%;
-
-  animation: float2 30s ease-in-out infinite alternate;
+    filter: blur(26px) saturate(120%);
+    opacity:.40; border-radius:50%;
+    animation: float2 30s ease-in-out infinite alternate;
 }
-
