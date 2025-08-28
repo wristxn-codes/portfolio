@@ -27,7 +27,7 @@
       <section id="projects">
         <h2>Projects</h2>
 
-        <article>
+        <article class="reveal" style="--delay:.05s">
             <img class="proj-img" src="https://picsum.photos/600/360" alt="Project One preview">
             <h3>Project One</h3>
 
@@ -41,7 +41,7 @@
             </ul>
         </article>
 
-        <article>
+        <article class="reveal" style="--delay:.05s">
           <h3>Project Two</h3>
           <p>Short Desc.</p>
           <a href="#">Live</a> · <a href="#">Code</a>
@@ -62,7 +62,7 @@
         <h2>Contact</h2>
         <p>
           Email me at
-          <a href="mailto:seal.tristans@gmail.com">seal.tristans@gmail.com</a>
+          <a href="mailto:seal.tristan@icloud.com">seal.tristan@icloud.com</a>
         </p>
       </section>
     </main>
@@ -72,7 +72,19 @@
     </footer>
 
     <script>
-      document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+  
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('show');
+        io.unobserve(e.target); // animate once
+      }
+    });
+  }, { threshold: 0.12 });
+
+  els.forEach(el => io.observe(el));
+</script>
+
   </body>
 </html>

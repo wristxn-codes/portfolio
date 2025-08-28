@@ -42,6 +42,15 @@ header nav a:hover { background: linear-gradient(180deg, #f5fbff, #d9f0ff); box-
     transform: translateY(-3px);
     box-shadow: 0 10px 24px rgba(0,160,255,.2);
 }
+.reveal { opacity: 0; transform: translateY(12px) scale(.992); transition: opacity .5s ease, transform .5s ease; }
+
+.reveal.show { opacity: 1; transform: translateY(0) scale(1); }
+
+
+
+@media (prefers-reduced-motion: reduce){
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
 
 .proj-img{
     width: 100%;
