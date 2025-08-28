@@ -1,122 +1,98 @@
-/* 0) reset-ish */
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  line-height: 1.6;
-  color: #0f172a;            /* ink */
-  background: #f8fafc;       /* light bg */
+* { box-sizing: border-box;}
+body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: 
+        radial-gradient(60vw 60vh at 15% -10%, rgba(0,180,255,.12), transparent 60%),
+        radial-gradient(60vw 60vh at 85% 110%, rgba(0,255,200,.10), transparent 60%),
+        linear-gradient(135deg, #e9f8ff, #eafaf3);
+    color: #0c1b24;
+    position: relative;
+    overflow-x: hidden;
+    z-index: 0;
 }
 
-/* 1) simple theme tokens (easy to tweak later) */
-:root{
-  --ink: #0f172a;
-  --muted: #334155;
-  --accent: #2563eb;   /* blue */
-  --bg: #f8fafc;
-  --card: #ffffff;
-  --border: #e2e8f0;
-  --radius: 14px;
-  --shadow: 0 10px 24px rgba(2, 6, 23, .06);
-}
+header, main, footer { max-width: 1100px; margin: 0 auto; padding: 12px 16px; position: relative; z-index: 1; }
 
-/* 2) layout: a max-width content column */
-main, header, footer {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 16px;
-}
+header { display: flex; align-items: center; gap: 12px; 
+    background: linear-gradient(180deg, rgba(240,248,255,.72), rgba(200,230,255,.45));
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(0,80,140,.15);
+    box-shadow: 0 6px 16px rgba(0,80,140,.15);
 
-/* 3) header: logo title + simple nav */
-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  border-bottom: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.5));
-  position: sticky;
-  top: 0;
-  backdrop-filter: blur(6px);
 }
-header h1 {
-  font-size: 20px;
-  margin: 8px 0;
-}
-nav {
-  margin-left: auto;  /* pushes nav to the right */
-  display: flex;
-  gap: 12px;
-}
-nav a {
-  text-decoration: none;
-  color: var(--muted);
-  padding: 6px 10px;
-  border-radius: 999px;
-}
-nav a:hover {
-  background: #e2e8f0;
-  color: var(--ink);
-}
+ 
+header nav { margin-left: auto; }
 
-/* 4) hero */
-#hero {
-  padding: 40px 0 16px;
-}
-#hero h2 {
-  font-size: clamp(28px, 6vw, 48px);
-  margin: 0 0 8px;
-}
-#hero p {
-  color: var(--muted);
-  margin: 0;
-}
+header nav a { text-decoration: none; color: #0e3446; padding: 8px 12px; border-radius: 999px; transition: .18s ease; }
 
-/* 5) sections */
-section {
-  padding: 24px 0;
-  border-top: 1px solid var(--border);
-}
-section h2 {
-  margin: 0 0 12px;
-  font-size: 22px;
-}
+header nav a:hover { background: linear-gradient(180deg, #f5fbff, #d9f0ff); box-shadow: inset 0 1px 0 rgba(255,255,255,.8), 0 4px 12px rgba(0,160,255,.25); }
 
-/* 6) project cards (box model demo) */
+#hero h2 { color:#0c1b24; font-weight:800; letter-spacing:.2px; }
+#hero p  { color:#2b5b73; }
+
+#hero { text-align: center; padding: 64px 12px 32px; }
+#hero h2 span { background: linear-gradient(90deg, #00b4ff, #34e6c6); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 1px 0 rgba(255,255,255,.6); }
+
 #projects article {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+    background: linear-gradient(180deg, #ffffffcc, #f0faffcc);  
+    border: 1px solid rgba(0,80,140,.15);
+    border-radius: 14px;
+    padding: 16px;
+    margin: 12px 0;
+    box-shadow: 0 6px 18px rgba(0,80,140,.12);
+}
+#projects article:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0,160,255,.2);
+}
+@media (prefers-reduced-motion: reduce){
+    body::before,
+    body::after{
+        animation: none;
+    }
+}
+@keyframes float1{
+    from{ transform: translate(0, 0) scale(1); }
+    to { transform: translate(3vw, 2vh) scale(1.04); }
+}
+@keyframes float2{
+  from{ transform: translate(0, 0) scale(1); }
+  to  { transform: translate(-3vw, -2vh) scale(1.03); }
+}
+body::before{
+    content:"";
+    position: fixed;
+    top: -12%;
+    left: -12%;
+    width: 46vmax;
+    height: 46vmax;
+    pointer-events: none;
+    z-index: 0;
 
-  /* BOX MODEL: content size + padding + border + margin */
-  padding: 16px;     /* space inside the box */
-  margin: 12px 0;    /* space outside the box */
-}
-#projects h3 {
-  margin: 0 0 6px;
-  font-size: 18px;
-}
-#projects p {
-  margin: 0 0 10px;
-  color: var(--muted);
-}
-#projects a {
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 600;
-}
-#projects a:hover { text-decoration: underline; }
+    /* glossy blobs */
+    background: radial-gradient(50% 50% at 50% 50%, rgba(0,180,255,.28) 0%, rgba(0,180,255,0) 60%);
+    filter: blur(24px) saturate(120%);
+    opacity: .45;
+    border-radius: 50%;
 
-/* 7) about list */
-#about ul {
-  padding-left: 18px;  /* indent bullets */
+    animation: float1 26s ease-in-out infinite alternate;
 }
 
-/* 8) footer */
-footer {
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  text-align: center;
-  padding-bottom: 32px;
+body::after{
+  content:"";
+  position: fixed;
+  bottom: -16%;
+  right: -14%;
+  width: 50vmax;
+  height: 50vmax;
+  pointer-events: none;
+  z-index: 0;
+
+  /* teal-green tint for contrast */
+  background: radial-gradient(50% 50% at 50% 50%, rgba(0,255,200,.22) 0%, rgba(0,255,200,0) 60%);
+  filter: blur(26px) saturate(120%);
+  opacity: .40;
+  border-radius: 50%;
+
+  animation: float2 30s ease-in-out infinite alternate;
 }
+
